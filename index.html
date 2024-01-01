@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <!-- <link rel="icon" href="images/favicon.png" /> -->
+  </head>
+
+  <body>
+    <header>
+      <div class="game-title">
+        <h1>
+          <span id="tic">Tic</span> <span id="tac">-Tac-</span>
+          <span id="toe">Toe</span>
+        </h1>
+      </div>
+
+      <h2></h2>
+      <h1 id="winner"></h1>
+      <h3>Who would like to go first</h3>
+      <button class="turn-button" id="playX">X</button>
+      <button class="turn-button" id="playO">O</button>
+    </header>
+    <div id="game-container">
+      <div id="board" class="grid-container">
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+      </div>
+
+      <button id="reset-button">Reset</button>
+    </div>
+
+    <script src="js/index.js"></script>
+  </body>
+</html>

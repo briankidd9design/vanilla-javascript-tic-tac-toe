@@ -1,0 +1,171 @@
+/* --------------------------------------------------------
+Style Sheet for Tic-Tac-Toe game
+version: 1.1.0
+last modified: 12.27.2023 by Brian Kidd
+author: Brian Kidd
+email: brian.kidd.one@gmail.com
+website: briankiddmedia.com
+-----------------------------------------------------------*/
+
+/* css starter */
+
+/* typography */
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+html {
+  height: 100%;
+  font-size: 62.5%;
+}
+body {
+  font-family: sans-serif;
+}
+/* #board .square.occupied-square {
+  pointer-events: none;
+} */
+/* .flex-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .flex-column {
+    height: 100%;
+    width: 100%;
+    flex-direction: column
+  } */
+/* .flex-wrap { */
+/* Tells the container to drop down once it reaces max-width */
+/* flex-wrap: wrap;
+    height: 432px;
+    width: 432px;
+  } */
+/* .square {
+    border: 2px solid rgba(0, 0, 0, .75);
+    height: 140px;
+    width: 140px;
+  } */
+/* 
+  #reset-button {
+    text-align: center;
+    font-size: 20px;
+    border: 1px solid black;
+    height: 55px;
+    width: 100px;
+  } */
+
+/*use grid instead */
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.game-title {
+  margin-top: 2rem;
+  font-size: 3rem;
+}
+
+/******* animation **************/
+@keyframes tic-animation {
+  from {
+    opacity: 0;
+    left: -500px;
+  }
+  to {
+    opacity: 1;
+    left: 0;
+  }
+}
+@keyframes tac-animation {
+  from {
+    opacity: 0;
+    top: -500px;
+  }
+  to {
+    opacity: 1;
+    top: 0;
+  }
+}
+@keyframes toe-animation {
+  from {
+    opacity: 0;
+    right: -500px;
+  }
+  to {
+    opacity: 1;
+    right: 0;
+  }
+}
+
+/************ and animation ****************/
+#tic {
+  color: blue;
+  position: relative;
+  animation: tic-animation 2s ease;
+}
+
+/* .run-animation {
+
+} */
+#tac {
+  color: red;
+  position: relative;
+  animation: tac-animation 2s ease;
+}
+#toe {
+  color: green;
+  position: relative;
+  animation: toe-animation 2s ease;
+}
+/* 
+#logo {
+  text-align: center;
+  font-family: Palatino Linotype, Book Antiqua, Palatino, serif;
+} */
+
+#game-container {
+  margin-top: 2rem;
+  display: flex;
+  width: 100%;
+  /* height: 100vh; */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.grid-container {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  width: 432px;
+  height: 432px;
+  grid-template-columns: repeat(3, 140px);
+  grid-template-rows: repeat(3, 140px);
+  /* grid-template: repeat(3, 1fr) / repeat(3, 1fr); */
+}
+.square {
+  border: 2px solid rgba(0, 0, 0, 0.75);
+  height: 140px;
+  width: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 5em;
+}
+.occupied {
+  border: 2px solid rgba(0, 0, 0, 0.75);
+  height: 140px;
+  width: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 5em;
+}
+#reset-button {
+  text-align: center;
+  font-size: 20px;
+  border: 1px solid black;
+  height: 55px;
+  width: 100px;
+}
