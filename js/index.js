@@ -1,10 +1,10 @@
 // Reference: https://javascript.plainenglish.io/the-worlds-most-empowering-tic-tac-toe-javascript-tutorial-a889e4c20883
 // Extra
-// Below is some of the funcitonality I added to the code by the original author: Anna Peterson
+// Below is some of the functionality I added to the code by the original author: Anna Peterson
 //Make it so players can keep score (completed)
 // Added some animation to the title of the game (completed)
 // Make it so players have the option of who can go first (right now, X always goes first) (completed)
-// Make sure the game can only being when the players have chosen who goes first;
+// Make sure the game can only begin when the players have chosen who goes first;
 // Add some more badass styling (not attempted yet)
 // Make it so after a square is filled in with one mark it cannot be changed (completed)
 // See if you can re-write a function a different way (completed)
@@ -12,6 +12,8 @@
 
 /*----- constants-----*/
 // These are all the possible winning combinations
+// Note that we’re checking that there is something in board[0] first. If we just check that all three positions are the same, we’ll get a winner when they're all empty. The first board[0] prevents that. This ternary has three conditions, but it’s still the same structure:
+// Every time a player takes a turn, we need to check if they made a winning move. Let’s start with our top row. It has the indexes 0 through 2. So, the winning logic will be: There is a win if there is a mark in index 0 and it matches the marks in indexes 1 and 2.
 const winningCombos = [
   [0, 1, 2],
   [3, 4, 5],
@@ -30,12 +32,9 @@ let turn;
 // initiate the score of each player
 let playerX = 0;
 let playerO = 0;
-// check to make sure the players have chose which player goes first before the game can begin. If they have not chosen who goes first, the game will not commence
+// check to make sure the players have chosen which player goes first before the game can begin. If they have not chosen who goes first, the game will not commence
 let playerFirst = false;
 
-// Every time a player takes a turn, we need to check if they made a winning move. Let’s start with our top row. It has the indexes 0 through 2. So, the winning logic will be: There is a win if there is a mark in index 0 and it matches the marks in indexes 1 and 2. Ternaries all day.
-
-// Note that we’re checking that there is something in board[0] first. If we just check that all three positions are the same, we’ll get a winner when they're all empty. The first board[0] prevents that. This ternary has three conditions, but it’s still the same structure:
 {
   /* <condition1 && condition2 && condition3 > ? <if all 3 conditions are true, this> : <else, this></else> */
 }
@@ -46,7 +45,8 @@ let win;
 
 /*----- cached element references -----*/
 
-// The Array.from() function will make an array from all elements returned by querySelectorAll. Notice that querySelectorAll is finding the element with the id of .board and selecting all the div children of that element. This way, we didn’t have to give each square an id, select them individually, and build a new array. JavaScript did that for us! Pretty cool!
+// The Array.from() function will make an array from all elements returned by querySelectorAll. Notice that querySelectorAll is finding the element with the id of board and selecting all the div children of that element. This way, we didn’t have to give each square an id, select them individually, and build a new array. JavaScript did that for us! Pretty cool!
+// NOTE: I cahnge the above so that "#board div" is now "#board .square" so that I could then change the class to occupied on a click event.
 // filter the occupied squares into a new function and then remove or disable the click event from that new array
 // const squares = Array.from(document.querySelectorAll("#board div"));
 // let clickCount = 0;
@@ -84,7 +84,7 @@ for (var i = 0; i < turnButton.length; i++) {
     // document.getElementById("playO").disabled = true;
     turnButton.forEach((turnButton) => {
       turnButton.disabled = true;
-      // checks to make sure the users have chose which player goes first before starting the game
+      // checks to make sure the users have chosen which player goes first before starting the game
       playerFirst = true;
       console.log(playerFirst);
     });
@@ -204,7 +204,7 @@ function handleTurn(event) {
 }
 
 function disableSquareClick(event) {
-  // this allows the user to click on a specific square and for the funcitonality of that square
+  // this allows the user to click on a specific square and for the funcitonality of that square to be disabled once a mark of X or O is in the square
   if (playerFirst == true) {
     let idx = squares.findIndex(function (square) {
       return square === event.target;
@@ -229,7 +229,7 @@ function disableSquareClick(event) {
 //Now, we need the getWinner() function to iterate through that winningCombos array and check if one of the players has a winning combination of marks on the board. We can use winningCombos.forEach() to do that. That way, we only need to write the win logic one time, but it will be checked against all 8 of our possible winning combinations. Our forEach() callback function will accept two arguments, the element in the array, and the index of the element: function(combo, index) Once again, we can use the same logic, but we’ll be testing if all three marks match a combo in the winning combos array. Give it a shot! You will end up with something like this:
 function getWinner() {
   let winner = null;
-  winningCombos.forEach(function (combo, index) {
+  winningCombos.forEach(function (combo) {
     // That looks like our logic from before, but we’ve written a function to check all the winning combos at once. Use the console.log() to check your function.
     if (
       // if there is a mark AND all three marks match a winning combination or combo in the combos array
@@ -242,6 +242,7 @@ function getWinner() {
   });
 
   keepScore(winner);
+  // if there has been a winner, then disable the square that have not been filled in the game.
   if (winner) {
     squares.forEach((square) => {
       if (square.className === "square") {
